@@ -30,7 +30,7 @@ This document defines the requirements for a mobile wallet/expense tracker with 
 - **JWT** – JSON Web Token.  
 
 ### 1.4 References  
-- GitHub Repo: [wallet-app-expo](https://github.com/burakorkmez/wallet-app-expo)  
+- GitHub Repo: this repository
 - Clerk Docs: https://clerk.com/docs  
 - Expo Docs: https://docs.expo.dev  
 - PostgreSQL Docs: https://www.postgresql.org/docs  
