@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.2.0",
+    "@types/node": "^24.7.2",
+    "assert": "^2.1.0"
+  }
+}
