@@ -3,5 +3,8 @@
     "@cucumber/cucumber": "^12.2.0",
     "@types/node": "^24.7.2",
     "assert": "^2.1.0"
+  },
+  "scripts": {
+    "test:features": "cucumber-js documentation/UCs/features --require tests/steps --publish-quiet"
   }
 }
