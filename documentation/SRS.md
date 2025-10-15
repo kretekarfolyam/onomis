@@ -7,9 +7,16 @@
 ## 1. Introduction  
 
 ### 1.1 Purpose  
-This document defines the requirements for a mobile wallet/expense tracker with an Express backend, Clerk authentication, PostgreSQL storage (via Neon), and Redis-based rate limiting. It is intended to guide development, quality assurance, and onboarding for contributors.  
+This Software Requirements Specification (SRS) describes all specifications for the application **ONOMIS**, a mobile-first personal finance app focused on simple expense & income tracking with a clear balance overview. It captures the system’s purpose, vision, features, and constraints to guide implementation and testing.
 
 ### 1.2 Scope  
+The project will be implemented as a **cross‑platform mobile app** (Expo/React Native) with a lightweight REST API (Node/Express + PostgreSQL). 
+Primary stakeholders and actors:
+
+- **Guest** – sees marketing/onboarding, proceeds to sign-up.
+- **Authenticated User** – creates transactions (income/expense), views balance & history, deletes items, logs out.
+- **Administrator** – oversees system health, database, and access control (out of band/ops).
+
 **In scope (MVP):**  
 - Email-code authentication with Clerk (signup/login/verification, logout).  
 - Dashboard showing **current balance** and **transaction history** (latest first).  
@@ -23,18 +30,35 @@ This document defines the requirements for a mobile wallet/expense tracker with 
 - Push notifications.  
 
 ### 1.3 Definitions, Acronyms and Abbreviations  
-- **Clerk** – Hosted authentication service.  
-- **Expo** – React Native framework for cross-platform mobile development.  
-- **Neon** – Managed Postgres database.  
-- **CRUD** – Create, Read, Update, Delete.  
-- **JWT** – JSON Web Token.  
+| Abbrevation | Explanation                            |
+| ----------- | -------------------------------------- |
+| SRS         | Software Requirements Specification    |
+| UC          | Use Case                               |
+| UCD         | overall Use Case Diagram               |
+| N/A         | not applicable                         |
+| tbd         | to be determined                       |
+| FAQ         | Frequently asked Questions             |
+| MVP         | Minimum Viable Product                 |
+| JWT         | JSON Web Token                         |
+| a11y        | Accessibility                          |
+| i18n        | Internationalization                   |
+| REST        | Representational State Transfer        |
+| CRUD        | Create, Read, Update, Delete           |
+| Neon        | Managed Postgres database              |
+| Expo        | React Native framework for cross-platform mobile development|
+| Clerk       |  Hosted authentication service         |
 
 ### 1.4 References  
-- GitHub Repo: this repository
-- Clerk Docs: https://clerk.com/docs  
-- Expo Docs: https://docs.expo.dev  
-- PostgreSQL Docs: https://www.postgresql.org/docs  
-- Redis Docs: https://redis.io/documentation  
+| Title                                                              | Date       | Publishing organization             |
+| -------------------------------------------------------------------|:----------:| ------------------------------------|
+| ONOMIS Project Docs (internal)                                     | 01.10.2025 | ONOMIS Team                         |
+| IEEE 830 – SRS Recommended Practice                                |            | IEEE                                |
+| [React Native](https://reactnative.dev)                            |            | Meta Platform                       |
+| [Expo](https://expo.dev)                                           |            | EXPO                                |
+| [Express](https://expressjs.com)                                   |            | Open JS Foundation                  |
+| [PostgreSQL](https://www.postgresql.org)                           |            | PostgreSQL Global Development Group |
+| [Clerk](https://clerk.com/doc)                                     |            | Clerk.dev                           |
+| [Redis Docs](https://redis.io/documentation)                       |            | Redis Ltd.                          |
 
 ### 1.5 Overview  
 This SRS covers the overall description of the product and its requirements, including functional, non-functional, platform, and process specifications.  
@@ -96,7 +120,9 @@ This SRS covers the overall description of the product and its requirements, inc
 #### 3.3.1 Reliability Requirement One  
 - Backend uptime target: **≥99% per month**.  
 - Balance always consistent with transactions in DB.  
-- App recovers gracefully from network/API errors.  
+- App recovers gracefully from network/API errors.
+- Redis caching prevents excessive API calls and improves resilience.  
+- Local state persists temporarily if network connection drops; syncs automatically when online.
 
 ---
 
@@ -143,7 +169,9 @@ This SRS covers the overall description of the product and its requirements, inc
 ### 3.8 Purchased Components  
 - Clerk (auth).  
 - Neon Postgres (DB).  
-- Redis Cloud (rate limiting).  
+- Redis Cloud (rate limiting).
+- Cloudinary subscription (file hosting).
+
 
 ---
 
@@ -152,7 +180,9 @@ This SRS covers the overall description of the product and its requirements, inc
 #### 3.9.1 User Interfaces  
 - **Login Screen**: email input, code entry.  
 - **Home Screen**: balance display, transaction list, pull-to-refresh.  
-- **Create Screen**: input fields (amount, type, note), submit button.  
+- **Create Screen**: input fields (amount, type, note), submit button.
+- **Error Modals / Toasts** – Display API or validation errors.  
+
 
 #### 3.9.2 Hardware Interfaces  
 - iOS 13+ / Android 8+ smartphones.  
@@ -163,6 +193,10 @@ This SRS covers the overall description of the product and its requirements, inc
   - `POST /transactions` – create  
   - `DELETE /transactions/:id` – delete  
   - `GET /balance` – current balance  
+- Clerk Api (Authentication)
+- Neon Postgress DB
+- Redis Cloudq
+
 
 #### 3.9.4 Communications Interfaces  
 - HTTP/HTTPS; HTTPS required in production.  
@@ -179,7 +213,8 @@ This SRS covers the overall description of the product and its requirements, inc
 ### 3.12 Applicable Standards  
 - REST API best practices.  
 - OWASP auth/session security.  
-- IEEE-830 (SRS standard).  
+- IEEE-830 (SRS standard).
+- ESLint/Prettier (JS/TS).
 
 ---
 
