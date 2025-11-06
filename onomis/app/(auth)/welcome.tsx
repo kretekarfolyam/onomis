@@ -1,11 +1,11 @@
-import { StyleSheet, TouchableOpacity, Image, View, Text } from 'react-native'
-import React from 'react'
+import Button from '@/components/Button'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
-import Button from '@/components/Button'
-
+import React from 'react'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated'
 
 const Welcome = () => {
   return (
@@ -13,32 +13,47 @@ const Welcome = () => {
         <View style={styles.container}>
             <View>
                 <TouchableOpacity style={styles.loginButton}>
-                    <Typo fontWeight={"500"}>Sign in</Typo>
+                    <Typo fontWeight={"500"}>
+                      Sign in
+                      </Typo>
                 </TouchableOpacity>
-                <Image
+                <Animated.Image
+                entering= {FadeIn.duration(2000)}
                 source={require('../../assets/images/welcome.png')}
                 style={styles.welcomeImage}
                 resizeMode='contain'
                 />
             </View>
+
             <View style={styles.footer}>
-                <View style={{ alignItems: "center"}}>
-                    <Typo size={30} fontWeight={"800"}>Control your money.</Typo>
-                    <Typo size={30} fontWeight={"800"}>Own your future.</Typo>
+                <Animated.View entering={FadeInDown.duration(1000).springify().damping(12)}
+                style={{ alignItems: "center"}}>
+                    <Typo size={30} fontWeight={"800"}>
+                      Control your money.
+                    </Typo>
+                    <Typo size={30} fontWeight={"800"}>
+                      Own your future.
+                      </Typo>
+                </Animated.View>
 
-                </View>
-                <View style={{alignItems: 'center', gap: 2}}>
-                   <Typo size={17} color={colors.textLight}>See where your money goes,</Typo>
-                   <Typo size={17} color={colors.textLight}>and stay in control every day.</Typo>
+                <Animated.View entering={FadeInDown.duration(1000).delay(100).springify().damping(12)}
+                style={{ alignItems: "center", gap: 2 }}>
+                   <Typo size={17} color={colors.textLight}>
+                    See where your money goes,
+                    </Typo>
+                   <Typo size={17} color={colors.textLight}>
+                    and stay in control every day.
+                   </Typo>
+                </Animated.View>
 
-                </View>
-                <View style={styles.buttonContainer}>
+                <Animated.View entering={FadeInDown.duration(1000).delay(200).springify().damping(12)}
+                style={styles.buttonContainer}>
                     <Button >
                         <Typo size={22} color={colors.neutral900} fontWeight={"600"}>
                             Get started
                         </Typo>
                     </Button>
-                </View>
+                </Animated.View>
             </View>
         </View>
     </ScreenWrapper>
