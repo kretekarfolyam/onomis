@@ -30,7 +30,7 @@ const Button = ({
   )
 }
 
-export default Button
+export default Button;
 
 const styles = StyleSheet.create({
   button: {

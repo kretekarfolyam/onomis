@@ -1,38 +1,42 @@
-import {
-  Alert,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-import React, { useRef, useState } from "react";
-import ScreenWrapper from "../../components/ScreenWrapper";
-import { StatusBar } from "expo-status-bar";
-import { useRouter } from "expo-router";
 import BackButton from "@/components/BackButton";
-import Input from "@/components/Input";
 import Button from "@/components/Button";
-import { verticalScale } from "@/utils/styling";
-import { colors, spacingX, spacingY } from "@/constants/theme";
+import Input from "@/components/Input";
 import Typo from "@/components/Typo";
+import { colors, spacingX, spacingY } from "@/constants/theme";
+import { useAuth } from "@/contexts/authContext";
+import { verticalScale } from "@/utils/styling";
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import * as Icons from "phosphor-react-native";
-//import { useAuth } from "@/contexts/authContext";
+import React, { useRef, useState } from "react";
+import { Alert, Pressable, StyleSheet, View } from "react-native";
+import ScreenWrapper from "../../components/ScreenWrapper";
 
-const SignUp = () => {
-  const router = useRouter();
+const Register = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const nameRef = useRef("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { register: registerUser } = useAuth();
+  const router = useRouter();
 
-  const onSubmit = async () => {
+
+  const handleSubmit = async () => {
     if (!emailRef.current || !passwordRef.current || !nameRef.current) {
-      Alert.alert("Register", "please fill all the fields!");
+      Alert.alert("Sign up", "please fill all the fields!");
       return;
+    };
+    setIsLoading(true);
+    const res = await registerUser(
+      emailRef.current,
+      passwordRef.current,
+      nameRef.current
+    );
+    setIsLoading(false);
+    console.log("register result: ", res);
+    if (!res.success) {
+      Alert.alert("Sign up", res.msg);
     }
-
-  
   };
 
   return (
@@ -91,7 +95,7 @@ const SignUp = () => {
             onChangeText={(value) => (passwordRef.current = value)}
           />
       
-          <Button loading={loading} onPress={onSubmit}>
+          <Button loading={isLoading} onPress={handleSubmit}>
             <Typo fontWeight={"700"} color={colors.black} size={21}>
               Sign Up
             </Typo>
@@ -111,7 +115,7 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;
 
 const styles = StyleSheet.create({
   container: {
