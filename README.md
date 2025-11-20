@@ -121,11 +121,11 @@ cd onomis
 npm install
 
 # Start the Expo development server
-npm run start
+npx expo start
 
 # Optional platform shortcuts
-npm run ios
-npm run android
+npx expo start -i
+npx expo start -a
 ```
 
 The entry point uses Expo Router (`expo-router/entry`). Scan the QR code with Expo Go or run on a simulator/emulator. Use `npm run test` inside `onomis/` to execute Jest unit tests.
