@@ -47,3 +47,5 @@ cucumber-report.json
 # Temporary files
 temp/
 tmp/
+onomis/config/firebase.ts
+onomis/constants/index.ts

@@ -1,25 +1,26 @@
-import { auth, firestore } from "@/config/firebase";
-import { AuthContextType, UserType } from "@/types";
-import { useRouter } from "expo-router";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {
-    createUserWithEmailAndPassword,
-    onAuthStateChanged,
-    signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  User as FirebaseUser,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { AuthContextType, UserType } from "@/types";
+import { auth, firestore } from "@/config/firebase";
+import { Router, useRouter, useSegments } from "expo-router";
 
+const AuthContext = createContext<AuthContextType | null>(null);
 
-const AuthContext = createContext< AuthContextType  | null>(null);
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [user, setUser] = useState<UserType>(null);
+  const router: Router = useRouter();
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
-    const [user, setUser] = useState<UserType>(null);
-    const router = useRouter();
-
-
-    useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (firebaseUser) => {
-        console.log('firebase user: ', firebaseUser)
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      // console.log("got user in auth state changed: ", firebaseUser);
       if (firebaseUser) {
         setUser({
           uid: firebaseUser.uid,
@@ -28,16 +29,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
         });
         updateUserData(firebaseUser.uid);
         router.replace("/(tabs)");
-
       } else {
         setUser(null);
         router.replace("/(auth)/welcome");
       }
     });
-    return () => unsub();
+
+    return () => unsubscribe();
   }, []);
 
- 
   const login = async (email: string, password: string) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -67,7 +67,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
       let msg = error.message;
 
       if (msg.includes("(auth/invalid-email)")) msg = "Invalid email";
-      if (msg.includes("(auth/email-already-in-use)")) msg = "This email is already in use";
+      if (msg.includes("(auth/email-already-in-use)"))
+        msg = "This email is already in use";
 
       return { success: false, msg };
     }
@@ -104,14 +105,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-        {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
+
   if (!context) {
     throw new Error("useAuth must be wrapped inside AuthProvider");
   }

@@ -1,22 +1,31 @@
-import { colors } from '@/constants/theme';
-import { useRouter } from "expo-router";
-import React, { useEffect } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import React, { useEffect } from "react";
+import { Href, Router, useRouter } from "expo-router";
+import ScreenWrapper from "@/components/ScreenWrapper";
 
+import Loading from "@/components/Loading";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { colors } from "@/constants/theme";
+import { StatusBar } from "expo-status-bar";
 
-const index = () => {
+const SplashScreen = () => {
+  const router = useRouter();
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     router.replace("/welcome");
+  //   }, 1500);
+  // }, []);
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <Image
         style={styles.logo}
         resizeMode="contain"
         source={require("../assets/images/splashImage.png")}
       />
+      {/* <Text style={styles.title}>Expense Tracker</Text> */}
     </View>
-  )
-}
-
-export default index;
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -29,5 +38,13 @@ const styles = StyleSheet.create({
   logo: {
     height: "20%",
     aspectRatio: 1,
-  }
-})
+    // width: "50%",
+  },
+  // title: {
+  //   fontSize: 30,
+  //   fontWeight: "bold",
+  //   color: colors.neutral200,
+  // },
+});
+
+export default SplashScreen;

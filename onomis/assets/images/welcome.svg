@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Onomis" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Sora-Bold, Sora;
+        font-size: 78px;
+        font-variation-settings: 'wght' 700;
+        font-weight: 700;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #d9d9d9;
+      }
+
+      .cls-4 {
+        letter-spacing: .33em;
+      }
+
+      .cls-5 {
+        letter-spacing: .33em;
+      }
+
+      .cls-6 {
+        letter-spacing: .3em;
+      }
+
+      .cls-7 {
+        letter-spacing: .3em;
+      }
+
+      .cls-8 {
+        letter-spacing: .32em;
+      }
+
+      .cls-9 {
+        letter-spacing: .32em;
+      }
+
+      .cls-10 {
+        letter-spacing: .33em;
+      }
+
+      .cls-2 {
+        font-family: Sora-SemiBold, Sora;
+        font-size: 21px;
+        font-variation-settings: 'wght' 600;
+        font-weight: 600;
+      }
+
+      .cls-11 {
+        fill: #6731a1;
+      }
+    </style>
+  </defs>
+  <g>
+    <polygon class="cls-3" points="229.91 228.4 159.82 152.94 195.28 115.79 230.54 78.21 235.57 159.17 265 190.85 229.91 228.4"/>
+    <polygon class="cls-11" points="276.73 73.75 346.82 149.21 311.37 186.36 276.11 223.94 276.42 148.85 241.65 111.3 276.73 73.75"/>
+  </g>
+  <text class="cls-1" transform="translate(98.41 308.02)"><tspan x="0" y="0">onomis</tspan></text>
+  <text class="cls-2" transform="translate(93.9 411.11)"><tspan class="cls-9" x="0" y="0">O</tspan><tspan class="cls-5" x="24.8" y="0">WN </tspan><tspan class="cls-6" x="90.64" y="0">Y</tspan><tspan class="cls-5" x="110.77" y="0">OUR F</tspan><tspan class="cls-10" x="211.36" y="0">UT</tspan><tspan class="cls-5" x="254.33" y="0">URE</tspan></text>
+  <text class="cls-2" transform="translate(58.47 369.32) rotate(.34)"><tspan class="cls-5" x="0" y="0">CONT</tspan><tspan class="cls-8" x="93.66" y="0">R</tspan><tspan class="cls-5" x="115.5" y="0">OL </tspan><tspan class="cls-7" x="170.58" y="0">Y</tspan><tspan class="cls-4" x="190.72" y="0">OUR MONEY</tspan></text>
+</svg>

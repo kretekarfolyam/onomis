@@ -1,9 +1,9 @@
 import { scale, verticalScale } from "@/utils/styling";
 
 export const colors = {
-  primary: "#a3e635",
-  primaryLight: "#0ea5e9",
-  primaryDark: "#0369a1",
+  primary: "#dcdcdcff",
+  primaryLight: "#c053ffff",
+  primaryDark: "#3f0063ff",
   text: "#fff",
   textLight: "#e5e5e5",
   textLighter: "#d4d4d4",
@@ -11,6 +11,7 @@ export const colors = {
   black: "#000",
   rose: "#ef4444",
   green: "#16a34a",
+  purple: "#a100ff",
   neutral50: "#fafafa",
   neutral100: "#f5f5f5",
   neutral200: "#e5e5e5",
